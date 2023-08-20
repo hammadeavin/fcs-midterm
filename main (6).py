@@ -102,7 +102,7 @@ def RemoveEmployee():
 
     # Open the file in write mode to update its content
     with open("readfile.txt", "w") as f:
-        # Loop through the employee records to rewrite the file without the deleted record
+        # Loop through the employee records to rewrite the file without the deleted             record
         for record in employee_records:
             emp_id, name, time, gender, salary = record
             # Write the record to the file
@@ -141,7 +141,21 @@ def CheckSalary(userName):
               print("Salary:", salary)
             else:
               print("user name not found")
-  
+
+def Exit(login_time):
+   with open("readfile.txt", "r") as f:
+        lines = f.readlines()
+   with open("readfile.txt", "w") as f:
+        for line in lines:
+            if userName in line:
+                emp_id, name, time, gender, salary = line.strip().split(", ")
+                updated_line = f"{emp_id}, {name}, {login_time}, {gender}, {salary}\n"
+                f.write(updated_line)
+            else:
+                f.write(line)
+
+        print("Logged out successfully.")
+# A fuction if the user is an admin  
 def Admin():
     while True:
         print("Choose a number: ")
@@ -169,15 +183,19 @@ def Admin():
             break
         else:
             print("Wrong input")
+          
 #A function if the user is an employee          
 def Employee(userName):
+  login_time = datetime.datetime.now().strftime("%Y%m%d")
   print("Choose a number: ")
   print("1. Chek my salary")
   print("2. Exit")
   choice=int(input())
   if choice==1:
     CheckSalary(userName)
-  
+  if choice==2:  
+    Exit( login_time)
+    
 print("Welcome to the employee database system!")
 userName = input("Enter your username: ")
 password = input("Enter your password: ")
