@@ -1,0 +1,3 @@
+emp001, cdaoud, 20230820, male, 1500
+emp002, manuella, 20220803, female, 1500
+emp003, avin, 20230820, female, 8000
